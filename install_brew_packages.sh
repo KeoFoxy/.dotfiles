@@ -8,6 +8,8 @@ packages=(
     "eza"
     "neofetch"
     "node"
+    "fzf"
+    "ripgrep"
 )
 
 install_package() {
