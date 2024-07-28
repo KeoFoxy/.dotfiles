@@ -1,0 +1,5 @@
+defaults write company.thebrowser.Browser currentAppIconName -string schoolbook 
+defaults write company.thebrowser.Browser currentAppIconName -string colorful
+defaults write company.thebrowser.Browser currentAppIconName -string neon
+defaults write company.thebrowser.Browser currentAppIconName -string flutedGlass
+defaults write company.thebrowser.Browser currentAppIconName -string hologram
