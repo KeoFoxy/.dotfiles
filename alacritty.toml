@@ -1,0 +1,31 @@
+[env]
+TERM = "xterm-256color"
+
+[window]
+padding.x = 20
+padding.y = 20
+
+decorations = "Buttonless"
+opacity = 0.92
+blur = true
+
+[font]
+normal.family = "UbuntuSansMono Nerd Font Mono"
+normal.style = "Regular"
+
+bold.family = "UbuntuSansMono Nerd Font Mono"
+bold.style = "Bold"
+
+italic.family = "CartographCF Nerd Font"
+italic.style = "Italic"
+
+bold_italic.family = "CartographCF Nerd Font"
+bold_italic.style = "Bold Italic"
+
+offset.x = 0
+offset.y = 0
+
+glyph_offset.x = 0
+glyph_offset.y = 0
+
+size = 18.0
