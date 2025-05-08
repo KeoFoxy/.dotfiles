@@ -3,31 +3,37 @@
 FONT_DIR="./Fonts"
 
 install_fonts_mac() {
-    echo "Установка шрифтов на macOS..."
+    echo "Installing macOS fonts..."
     DEST_DIR="$HOME/Library/Fonts"
     find "$FONT_DIR" -type f -name "*.otf" -exec cp -v {} "$DEST_DIR" \;
-    echo "Все шрифты установлены на macOS."
+    echo "All fonts has been installed"
 }
 
-# Функция для установки шрифтов на Linux
 install_fonts_linux() {
-    echo "Установка шрифтов на Linux..."
+    echo "Installing Linux fonts..."
     DEST_DIR="$HOME/.local/share/fonts"
     mkdir -p "$DEST_DIR"
     find "$FONT_DIR" -type f -name "*.otf" -exec cp -v {} "$DEST_DIR" \;
     fc-cache -fv
-    echo "Все шрифты установлены на Linux."
+    echo "All fonts has been installed"
 }
 
-# Функция для установки шрифтов на Windows
+# NOT WORKING
 install_fonts_windows() {
-    echo "Установка шрифтов на Windows..."
-    DEST_DIR="/mnt/c/Windows/Fonts"
-    find "$FONT_DIR" -type f -name "*.otf" -exec cp -v {} "$DEST_DIR" \;
-    echo "Все шрифты установлены на Windows."
+    echo "Installing Windows fonts via PowerShell..."
+    
+    if ! command -v powershell.exe &>/dev/null; then
+        echo "Error: powershell.exe not found in PATH. Execute script in WSL/MSYS or add PowerShell to PATH." >&2
+        exit 1
+    fi
+    
+    WIN_FONT_DIR=$(wslpath -w "$FONT_DIR")
+    
+    powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \
+    "Copy-Item -Path '${WIN_FONT_DIR}\\*.otf' -Destination 'C:\\Windows\\Fonts' -Force -Recurse"
+    echo "All fonts have been installed to C:\\Windows\\Fonts"
 }
 
-# Определение операционной системы и установка шрифтов
 if [[ "$OSTYPE" == "darwin"* ]]; then
     install_fonts_mac
     elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
@@ -35,6 +41,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     elif [[ "$OSTYPE" == "cygwin" ]] || [[ "$OSTYPE" == "msys" ]]; then
     install_fonts_windows
 else
-    echo "Неизвестная операционная система: $OSTYPE"
+    echo "Unknown OS: $OSTYPE"
     exit 1
 fi
